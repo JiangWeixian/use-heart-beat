@@ -1,36 +1,35 @@
-# @aiou/rollup-template
-> rollup-template for single lib
+# Welcome to use-heart-beat
+![Version](https://img.shields.io/badge/version-0.0.0-blue.svg?cacheSeconds=2592000)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](#)
+[![Twitter: jiangweixian](https://img.shields.io/twitter/follow/jiangweixian.svg?style=social)](https://twitter.com/jiangweixian)
 
-[![npm](https://img.shields.io/npm/v/@aiou/rollup-template?style=for-the-badge)](https://github.com/JiangWeixian/templates/tree/master/packages/core) [![GitHub](https://img.shields.io/github/license/jiangweixian/templates?style=for-the-badge)](https://github.com/JiangWeixian/templates/tree/master/packages/rollup-template)
+> polling request in react hooks
 
-## Note
+## Install
 
-- maybe need to custom `prepublishOnly script` in package.json and other package info
-- need reconfig `baseUrl and paths` in `tsconfig.json`
-
-This repo contains a bare-bones example of how to create a library using Rollup, including importing a module from `node_modules` and converting it from CommonJS.
-
-We're creating a library called `how-long-till-lunch`, which usefully tells us how long we have to wait until lunch, using the [ms](https://github.com/zeit/ms) package:
-
-```js
-console.log('it will be lunchtime in ' + howLongTillLunch());
+```sh
+npm install use-heart-beat --save
 ```
 
-## Getting started
+## Run tests
 
-`npm run build` builds the library to `dist`, generating three files:
+```sh
+npm run test
+```
 
-* `dist/how-long-till-lunch.cjs.js`
-    A CommonJS bundle, suitable for use in Node.js, that `require`s the external dependency. This corresponds to the `"main"` field in package.json
-* `dist/how-long-till-lunch.esm.js`
-    an ES module bundle, suitable for use in other people's libraries and applications, that `import`s the external dependency. This corresponds to the `"module"` field in package.json
-* `dist/how-long-till-lunch.umd.js`
-    a UMD build, suitable for use in any environment (including the browser, as a `<script>` tag), that includes the external dependency. This corresponds to the `"browser"` field in package.json
+## Author
 
-`npm run dev` builds the library, then keeps rebuilding it whenever the source files change using [rollup-watch](https://github.com/rollup/rollup-watch).
+👤 **JW**
 
-`npm test` builds the library, then tests it.
+* Twitter: [@jiangweixian](https://twitter.com/jiangweixian)
+* Github: [@JiangWeixian](https://github.com/JiangWeixian)
 
-# Q&A
+## Show your support
 
-1. rollup is not recommended, if project that contains builtin node module
+Give a ⭐️ if this project helped you!
+
+[![support us](https://img.shields.io/badge/become-a patreon%20us-orange.svg?cacheSeconds=2592000)](https://www.patreon.com/jiangweixian)
+
+
+***
+_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
