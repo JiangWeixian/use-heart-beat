@@ -34,7 +34,7 @@ export default [
   // `file` and `format` for each target)
   {
     input: 'src/index.ts',
-    external: ['ms'],
+    external: [],
     plugins: [
       typescript(), // so Rollup can convert TypeScript to JavaScript
       alias({
