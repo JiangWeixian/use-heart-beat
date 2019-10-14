@@ -1,7 +1,7 @@
 # Welcome to use-heart-beat
-![Version](https://img.shields.io/badge/version-0.0.0-blue.svg?cacheSeconds=2592000)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](#)
-[![Twitter: jiangweixian](https://img.shields.io/twitter/follow/jiangweixian.svg?style=social)](https://twitter.com/jiangweixian)
+![Version](https://img.shields.io/badge/version-0.0.0-blue.svg?cacheSeconds=2592000&style=for-the-badge)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](#)
+[![Twitter: jiangweixian](https://img.shields.io/twitter/follow/jiangweixian.svg?style=for-the-badge)](https://twitter.com/jiangweixian)
 
 > polling request in react hooks
 
