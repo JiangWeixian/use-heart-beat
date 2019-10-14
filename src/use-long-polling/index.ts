@@ -1,67 +1,41 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useCallback, useMemo } from 'react'
 
-import { createHeartBeator, HeartBeator } from '~utils/api'
+import { createHeartBeator, CreateHeartBeatorProps } from './service'
 
-const useHeartbeat = <T>({
-  defaultDeaded = true,
-  delay = 3000,
-  api,
-  onStop,
-  onSuccess,
-}: {
-  defaultDeaded: boolean
-  delay?: number
-  api(): Promise<{ data: T }> // is long pooling function
-  onStop(data: T): boolean
-  onSuccess?(data: T): void
-}) => {
-  // Is kill the pooling?
-  const [deaded, setDeaded] = useState<boolean>(defaultDeaded)
-  const heartbeator = useRef<HeartBeator<T>>()
-  // const savedApi = useRef<() => Promise<{ data: T }>>()
+export type UsePollingProps<T = any> = {
+  id: string
+  defaultDead: boolean
+} & CreateHeartBeatorProps<T>
 
+export const useLongPolling = <T>(props: UsePollingProps<T>) => {
+  const [data, setData] = useState<T>()
+  const [dead, setDead] = useState<boolean>(!!props.defaultDead)
+  const handleSuccess = useCallback(
+    (value: T) => {
+      setData(value)
+      props.onSucess && props.onSucess(value)
+    },
+    [props.id, props.onSucess],
+  )
+  const heatbeator = useMemo(() => {
+    return createHeartBeator({ ...props, onSucess: handleSuccess })
+  }, [props.id])
   useEffect(() => {
-    heartbeator.current = createHeartBeator({
-      api,
-      delay,
-      onSucess: onSuccess ? onSuccess : () => undefined,
-      onStop(data) {
-        const isDeaded = onStop(data)
-        setDeaded(isDeaded)
-        return isDeaded
-      },
-      onError() {
-        setDeaded(true)
-      },
-    })
-  }, [api])
-
-  useEffect(() => {
-    function start() {
-      if (!heartbeator.current) {
-        return
-      }
-      heartbeator.current.poll()
+    if (!heatbeator) {
+      return
     }
-    function cancel() {
-      if (!heartbeator.current) {
-        return
-      }
-      heartbeator.current.cancel()
+    if (dead) {
+      heatbeator.cancel()
+      return
     }
-    if (!deaded) {
-      start()
-    }
-
-    return () => {
-      cancel()
-    }
-  }, [deaded])
-
+    setData(undefined)
+    heatbeator.restart()
+    heatbeator.poll()
+    return () => heatbeator.cancel()
+  }, [props.id, dead])
   return {
-    deaded,
-    setDeaded,
+    data,
+    dead,
+    setDead,
   }
 }
-
-export default useHeartbeat
