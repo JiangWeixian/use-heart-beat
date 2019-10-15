@@ -11,10 +11,48 @@
 npm install use-heart-beat --save
 ```
 
-## Run tests
+## Usage
 
-```sh
-npm run test
+### use-polling
+
+```tsx
+import React, { useState, useCallback } from 'react';
+import { usePolling } from 'use-heart-beat';
+
+import { api } from '@/api';
+
+export default () => {
+  const fetch = useCallback(async () => {
+    return api.polling.polling(id);
+  }, []);
+  const { data } = usePolling<number>({ id: 'polling-example', api: fetch, delay: 1000 });
+  return (
+    <>
+      <span>{data}</span>
+    </>
+  );
+};
+```
+
+### use-long-polling
+
+```tsx
+import React, { useState, useCallback } from 'react';
+import { useLongPolling } from 'use-heart-beat';
+
+import { api } from '@/api';
+
+export default () => {
+  const fetch = useCallback(async () => {
+    return api.polling.longpolling(id);
+  }, []);
+  const { data } = useLongPolling<number>({ id: 'long-polling-example', api: fetch, delay: 1000 });
+  return (
+    <>
+      <span>{data}</span>
+    </>
+  );
+};
 ```
 
 ## Author
