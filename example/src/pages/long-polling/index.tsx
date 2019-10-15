@@ -7,7 +7,7 @@ import { api } from '@/api';
 export default () => {
   const [id, setId] = useState<string>('1');
   const fetch = useCallback(async () => {
-    return api.polling.request(id);
+    return api.polling.longpolling(id);
   }, [id]);
   const { data } = useLongPolling<number>({ id, api: fetch, delay: 1000 });
   return (
