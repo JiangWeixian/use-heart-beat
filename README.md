@@ -1,5 +1,5 @@
 # use-heart-beat
-![Version](https://img.shields.io/badge/version-0.0.0-blue.svg?cacheSeconds=2592000&style=for-the-badge)
+![Version](https://img.shields.io/npm/v/use-heart-beat?style=for-the-badge)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](#)
 [![Twitter: jiangweixian](https://img.shields.io/twitter/follow/jiangweixian.svg?style=for-the-badge)](https://twitter.com/jiangweixian)
 
