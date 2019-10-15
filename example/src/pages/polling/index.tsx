@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { useLongPolling } from 'use-heart-beat';
+import { usePolling } from 'use-heart-beat';
 import { Button } from 'antd';
 
 import { api } from '@/api';
@@ -7,9 +7,9 @@ import { api } from '@/api';
 export default () => {
   const [id, setId] = useState<string>('1');
   const fetch = useCallback(async () => {
-    return api.polling.longpolling(id);
+    return api.polling.polling(id);
   }, [id]);
-  const { data } = useLongPolling<number>({ id, api: fetch, delay: 1000 });
+  const { data } = usePolling<number>({ id, api: fetch, delay: 1000 });
   return (
     <>
       <span>{data}</span>
