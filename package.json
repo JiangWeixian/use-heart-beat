@@ -1,12 +1,11 @@
 {
   "name": "use-heart-beat",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "main": "lib/use-heart-beat.cjs.js",
   "module": "lib/use-heart-beat.esm.js",
   "browser": "lib/use-heart-beat.umd.js",
   "typings": "lib/src/index.d.ts",
-  "dependencies": {
-  },
+  "dependencies": {},
   "peerDependencies": {
     "react": ">=16.9.0",
     "@types/react": ">=16.9.5"
