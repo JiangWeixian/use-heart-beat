@@ -8,7 +8,7 @@ export type UsePollingProps<T = any> = {
   defaultDead?: boolean
 } & CreateHeartBeatorProps<T>
 
-export const useLongPolling = <T>(props: UsePollingProps<T>) => {
+export const usePolling = <T>(props: UsePollingProps<T>) => {
   const [data, setData] = useState<T>()
   const [dead, setDead] = useState<boolean>(!!props.defaultDead)
   const heatbeator = useRef<HeartBeator<T>>()
