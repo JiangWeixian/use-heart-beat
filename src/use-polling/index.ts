@@ -5,12 +5,12 @@ import { HeartBeator } from '@/typings'
 
 export type UsePollingProps<T = any> = {
   id: string
-  defaultDead?: boolean
+  isDeaded?: boolean
 } & CreateHeartBeatorProps<T>
 
 export const usePolling = <T>(props: UsePollingProps<T>) => {
   const [data, setData] = useState<T>()
-  const [dead, setDead] = useState<boolean>(!!props.defaultDead)
+  const [deaded, setDeaded] = useState<boolean>(!!props.isDeaded)
   const heatbeator = useRef<HeartBeator<T>>()
   const handleSuccess = useCallback(
     (value: T) => {
@@ -20,9 +20,12 @@ export const usePolling = <T>(props: UsePollingProps<T>) => {
     [props.id, props.onSucess],
   )
   useEffect(() => {
+    setDeaded(!!props.isDeaded)
+  }, [props.isDeaded])
+  useEffect(() => {
     // cancel prev heatbeator
     heatbeator.current && heatbeator.current.cancel()
-    if (dead) {
+    if (deaded) {
       return
     }
     heatbeator.current = createHeartBeator({ ...props, onSucess: handleSuccess })
@@ -30,10 +33,10 @@ export const usePolling = <T>(props: UsePollingProps<T>) => {
     heatbeator.current && heatbeator.current.restart()
     heatbeator.current && heatbeator.current.poll()
     return () => heatbeator.current && heatbeator.current.cancel()
-  }, [props.id, dead])
+  }, [props.id, deaded])
   return {
     data,
-    dead,
-    setDead,
+    deaded,
+    setDeaded,
   }
 }
