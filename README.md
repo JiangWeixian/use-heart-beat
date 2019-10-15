@@ -12,6 +12,7 @@ npm install use-heart-beat --save
 ```
 
 ## Usage
+> see more [props](/docs/use-heart-beat.md)
 
 ### use-polling
 
