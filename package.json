@@ -5,6 +5,12 @@
   "module": "lib/use-heart-beat.esm.js",
   "browser": "lib/use-heart-beat.umd.js",
   "typings": "lib/src/index.d.ts",
+  "license": "MIT",
+  "bugs": "https://github.com/JiangWeixian/use-heart-beat/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JiangWeixian/use-heart-beat"
+  },
   "dependencies": {},
   "peerDependencies": {
     "react": ">=16.9.0",
