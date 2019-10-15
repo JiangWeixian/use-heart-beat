@@ -5,7 +5,7 @@ import { HeartBeator } from '@/typings'
 
 export type UsePollingProps<T = any> = {
   id: string
-  defaultDead: boolean
+  defaultDead?: boolean
 } & CreateHeartBeatorProps<T>
 
 export const useLongPolling = <T>(props: UsePollingProps<T>) => {

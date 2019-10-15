@@ -4,7 +4,7 @@
   "main": "lib/use-heart-beat.cjs.js",
   "module": "lib/use-heart-beat.esm.js",
   "browser": "lib/use-heart-beat.umd.js",
-  "typings": "lib/index.d.ts",
+  "typings": "lib/src/index.d.ts",
   "dependencies": {
   },
   "peerDependencies": {
