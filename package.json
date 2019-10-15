@@ -11,6 +11,9 @@
     "type": "git",
     "url": "https://github.com/JiangWeixian/use-heart-beat"
   },
+  "files": [
+    "lib"
+  ],
   "dependencies": {},
   "peerDependencies": {
     "react": ">=16.9.0",
