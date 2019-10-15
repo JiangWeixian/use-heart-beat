@@ -1,12 +1,3 @@
-export type HeartBeator<T> = {
-  poll: Function
-  cancel: Function
-  restart: Function
-  onSuccess(data: T): void
-  onError(err: Error): void
-  onStop: Function
-}
-
 export type CreateHeartBeatorProps<T = any> = {
   api?(): Promise<T>
   delay?: number
