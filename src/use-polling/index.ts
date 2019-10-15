@@ -4,11 +4,12 @@ import { createHeartBeator, CreateHeartBeatorProps } from './service'
 
 export type UsePollingProps<T = any> = {
   id: string
+  defaultDead: boolean
 } & CreateHeartBeatorProps<T>
 
 export const usePolling = <T>(props: UsePollingProps<T>) => {
   const [data, setData] = useState<T>()
-  const [dead, setDead] = useState<boolean>(false)
+  const [dead, setDead] = useState<boolean>(!!props.defaultDead)
   const handleSuccess = useCallback(
     (value: T) => {
       setData(value)
@@ -23,11 +24,15 @@ export const usePolling = <T>(props: UsePollingProps<T>) => {
     if (!heatbeator) {
       return
     }
+    if (dead) {
+      heatbeator.cancel()
+      return
+    }
     setData(undefined)
     heatbeator.restart()
     heatbeator.poll()
     return () => heatbeator.cancel()
-  }, [props.id])
+  }, [props.id, dead])
   return {
     data,
     dead,

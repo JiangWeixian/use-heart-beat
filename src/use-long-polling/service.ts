@@ -15,54 +15,45 @@ export const createHeartBeator = <T>({
 }: CreateHeartBeatorProps<T>) => {
   let timer: number | null
   let canceled = false
-  let polling = false
   const heartbeator = {
     poll() {
       if (!api) {
         return
       }
-      timer = window.setInterval(() => {
-        polling = true
-        api()
-          .then(res => {
-            heartbeator.onSuccess(res)
-          })
-          .catch(heartbeator.onError)
-      }, delay)
+      api()
+        .then(res => heartbeator.onSuccess(res))
+        .catch(heartbeator.onError)
     },
     restart() {
       console.info('Restart Poll')
-      polling = false
-      // disconnect & clear
-      timer && window.clearInterval(timer)
+      timer && window.clearTimeout(timer)
       timer = null
     },
     cancel() {
       console.info('Cancel Poll')
-      polling = false
-      // disconnect & clear
       canceled = true
-      timer && window.clearInterval(timer)
+      timer && window.clearTimeout(timer)
       timer = null
     },
     onSuccess(data: T) {
-      polling = false
+      // if stop
       if (canceled) {
         heartbeator.onStop()
         return
       }
-      // if stop
       if (isStop && isStop(data)) {
         heartbeator.onStop()
         return
       }
-      if (onSucess && !polling && !canceled) {
+      // repoll after success
+      timer = window.setTimeout(heartbeator.poll, delay)
+      if (onSucess && !canceled) {
         onSucess(data)
       }
     },
-    onError(err: Error) {
+    onError(err: any) {
       console.error('Poll error')
-      polling = false
+      heartbeator.cancel()
       if (onError) {
         onError(err)
       }
