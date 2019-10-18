@@ -9,7 +9,7 @@ export default () => {
   const fetch = useCallback(async () => {
     return api.polling.polling(id);
   }, [id]);
-  const { data } = usePolling<number>({ id, api: fetch, delay: 1000 });
+  const { data } = usePolling<number>({ api: fetch, delay: 1000, defaultDeaded: id === '1' });
   return (
     <>
       <span>{data}</span>

@@ -1,42 +1,42 @@
-import { useState, useEffect, useCallback, useRef } from 'react'
+import { useState, useEffect, useCallback, useRef, useMemo } from 'react'
 
 import { createHeartBeator, CreateHeartBeatorProps } from './service'
 import { HeartBeator } from '@/typings'
 
 export type UsePollingProps<T = any> = {
-  id: string
-  isDeaded?: boolean
+  deaded?: boolean
+  defaultDeaded?: boolean
 } & CreateHeartBeatorProps<T>
 
 export const useLongPolling = <T>(props: UsePollingProps<T>) => {
   const [data, setData] = useState<T>()
-  const [deaded, setDeaded] = useState<boolean>(!!props.isDeaded)
+  const [deaded, setDeaded] = useState<boolean>(!!props.deaded)
   const heatbeator = useRef<HeartBeator<T>>()
+  const finalDeaded = useMemo(() => {
+    return props.deaded !== undefined ? props.deaded : deaded
+  }, [props.deaded, deaded])
   const handleSuccess = useCallback(
     (value: T) => {
       setData(value)
       props.onSucess && props.onSucess(value)
     },
-    [props.id, props.onSucess],
+    [props.onSucess],
   )
-  useEffect(() => {
-    setDeaded(!!props.isDeaded)
-  }, [props.isDeaded])
   useEffect(() => {
     // cancel prev heatbeator
     heatbeator.current && heatbeator.current.cancel()
-    if (deaded) {
-      return
+    if (finalDeaded) {
+      return heatbeator.current && heatbeator.current.cancel()
     }
     heatbeator.current = createHeartBeator({ ...props, onSucess: handleSuccess })
     setData(undefined)
     heatbeator.current && heatbeator.current.restart()
     heatbeator.current && heatbeator.current.poll()
     return () => heatbeator.current && heatbeator.current.cancel()
-  }, [props.id, deaded])
+  }, [finalDeaded])
   return {
     data,
-    deaded,
+    deaded: finalDeaded,
     setDeaded,
   }
 }
