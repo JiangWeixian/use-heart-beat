@@ -4,6 +4,7 @@ import { createHeartBeator, CreateHeartBeatorProps } from './service'
 import { HeartBeator } from '@/typings'
 
 export type UsePollingProps<T = any> = {
+  id: string
   deaded?: boolean
   defaultDeaded?: boolean
 } & CreateHeartBeatorProps<T>
@@ -20,7 +21,7 @@ export const useLongPolling = <T>(props: UsePollingProps<T>) => {
       setData(value)
       props.onSucess && props.onSucess(value)
     },
-    [props.onSucess],
+    [props.onSucess, props.id],
   )
   useEffect(() => {
     // cancel prev heatbeator
@@ -33,7 +34,7 @@ export const useLongPolling = <T>(props: UsePollingProps<T>) => {
     heatbeator.current && heatbeator.current.restart()
     heatbeator.current && heatbeator.current.poll()
     return () => heatbeator.current && heatbeator.current.cancel()
-  }, [finalDeaded])
+  }, [finalDeaded, props.id])
   return {
     data,
     deaded: finalDeaded,
