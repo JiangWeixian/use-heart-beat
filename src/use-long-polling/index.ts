@@ -26,7 +26,7 @@ export const useLongPolling = <T>(props: UsePollingProps<T>) => {
   useEffect(() => {
     // cancel prev heatbeator
     heatbeator.current && heatbeator.current.cancel()
-    if (finalDeaded) {
+    if (finalDeaded || !props.id) {
       return heatbeator.current && heatbeator.current.cancel()
     }
     heatbeator.current = createHeartBeator({ ...props, onSucess: handleSuccess })
