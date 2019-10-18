@@ -9,7 +9,8 @@ export default () => {
   const fetch = useCallback(async () => {
     return api.polling.longpolling(id);
   }, [id]);
-  const { data } = useLongPolling<number>({ id, api: fetch, delay: 1000 });
+  console.log(id);
+  const { data } = useLongPolling<number>({ api: fetch, delay: 1000, deaded: id === '2' });
   return (
     <>
       <span>{data}</span>

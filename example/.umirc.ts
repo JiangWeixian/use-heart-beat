@@ -12,7 +12,7 @@ const config: IConfig = {
         dva: false,
         dynamicImport: { webpackChunkName: true },
         title: 'example',
-        dll: true,
+        dll: false,
 
         routes: {
           exclude: [/components\//],

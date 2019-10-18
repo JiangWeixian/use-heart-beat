@@ -10,7 +10,8 @@
 |props|type|description|required|defalut|
 |:---|:---|:---|:---|:---|
 |api|async () => {}|polling api|true|
-|isDeaded|boolean|enable or disable polling |false|false|
+|deaded|boolean|enable or disable polling |false|false|
+|defaultDeaded|boolean|enable or disable polling in init |false|false|
 |delay|number|polling in `delay` ms|false|3000|
 |isStop|(value): boolean => {}|stop polling by response data|false||
 |onError|(err) => {}|triggered when catch error|false||
