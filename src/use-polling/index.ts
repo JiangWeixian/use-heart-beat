@@ -25,12 +25,12 @@ export const usePolling = <T>(props: UsePollingProps<T>) => {
   )
   useEffect(() => {
     // cancel prev heatbeator
+    setData(undefined)
     heatbeator.current && heatbeator.current.cancel()
     if (finalDeaded || !props.id) {
       return heatbeator.current && heatbeator.current.cancel()
     }
     heatbeator.current = createHeartBeator({ ...props, onSucess: handleSuccess })
-    setData(undefined)
     heatbeator.current && heatbeator.current.restart()
     heatbeator.current && heatbeator.current.poll()
     return () => heatbeator.current && heatbeator.current.cancel()
