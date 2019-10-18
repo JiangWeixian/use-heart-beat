@@ -9,6 +9,7 @@
 
 |props|type|description|required|defalut|
 |:---|:---|:---|:---|:---|
+|id|string||true||
 |api|async () => {}|polling api|true|
 |deaded|boolean|enable or disable polling |false|false|
 |defaultDeaded|boolean|enable or disable polling in init |false|false|
