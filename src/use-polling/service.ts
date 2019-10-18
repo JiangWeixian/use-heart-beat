@@ -51,13 +51,13 @@ export const createHeartBeator = <T>({
         heartbeator.onStop()
         return
       }
+      if (onSucess && !polling && !canceled) {
+        onSucess(data)
+      }
       // if stop
       if (isStop && isStop(data)) {
         heartbeator.onStop()
         return
-      }
-      if (onSucess && !polling && !canceled) {
-        onSucess(data)
       }
     },
     onError(err: Error) {

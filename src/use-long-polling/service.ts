@@ -41,15 +41,15 @@ export const createHeartBeator = <T>({
         heartbeator.onStop()
         return
       }
+      if (onSucess && !canceled) {
+        onSucess(data)
+      }
       if (isStop && isStop(data)) {
         heartbeator.onStop()
         return
       }
       // repoll after success
       timer = window.setTimeout(heartbeator.poll, delay)
-      if (onSucess && !canceled) {
-        onSucess(data)
-      }
     },
     onError(err: any) {
       console.error('Poll error')

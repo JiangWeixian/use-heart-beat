@@ -11,6 +11,11 @@
     "type": "git",
     "url": "https://github.com/JiangWeixian/use-heart-beat"
   },
+  "keywords": [
+    "polling",
+    "long-polling",
+    "react-hook"
+  ],
   "files": [
     "lib"
   ],
