@@ -1,3 +1,9 @@
+<!--
+  Title: use-heart-beat
+  Description: polling and long-polling request in react hooks
+  Author: JiangWeixian
+  -->
+
 # use-heart-beat
 ![Version](https://img.shields.io/npm/v/use-heart-beat?style=for-the-badge)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](#)
