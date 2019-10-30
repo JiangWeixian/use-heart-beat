@@ -1,6 +1,6 @@
 {
   "name": "use-heart-beat",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "main": "lib/use-heart-beat.cjs.js",
   "module": "lib/use-heart-beat.esm.js",
   "browser": "lib/use-heart-beat.umd.js",
