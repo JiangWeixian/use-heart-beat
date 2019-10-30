@@ -7,10 +7,11 @@ export type UsePollingProps<T = any> = {
   id: string
   deaded?: boolean
   defaultDeaded?: boolean
+  defalutData?: T
 } & CreateHeartBeatorProps<T>
 
 export const usePolling = <T>(props: UsePollingProps<T>) => {
-  const [data, setData] = useState<T>()
+  const [data, setData] = useState<T | undefined>(props.defalutData)
   const [deaded, setDeaded] = useState<boolean>(!!props.deaded)
   const heatbeator = useRef<HeartBeator<T>>()
   const finalDeaded = useMemo(() => {
@@ -25,7 +26,7 @@ export const usePolling = <T>(props: UsePollingProps<T>) => {
   )
   useEffect(() => {
     // cancel prev heatbeator
-    setData(undefined)
+    setData(props.defalutData)
     heatbeator.current && heatbeator.current.cancel()
     if (finalDeaded || !props.id) {
       return heatbeator.current && heatbeator.current.cancel()
