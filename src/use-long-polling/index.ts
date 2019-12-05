@@ -4,7 +4,7 @@ import { createHeartBeator, CreateHeartBeatorProps } from './service'
 import { HeartBeator } from '@/typings'
 
 export type UsePollingProps<T = any> = {
-  id: string
+  id: string | number
   deaded?: boolean
   defaultDeaded?: boolean
   defaultData?: T
