@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef, useMemo } from 'react'
+import { useState, useEffect, useRef, useMemo } from 'react'
 
 import { createHeartBeator, CreateHeartBeatorProps } from './service'
 import { HeartBeator } from '@/typings'
@@ -17,13 +17,10 @@ export const usePolling = <T>(props: UsePollingProps<T>) => {
   const finalDeaded = useMemo(() => {
     return props.deaded !== undefined ? props.deaded : deaded
   }, [props.deaded, deaded])
-  const handleSuccess = useCallback(
-    (value: T) => {
-      setData(value)
-      props.onSucess && props.onSucess(value)
-    },
-    [props.onSucess, props.id],
-  )
+  const handleSuccess = (value: T) => {
+    setData(value)
+    props.onSucess && props.onSucess(value)
+  }
   useEffect(() => {
     // cancel prev heatbeator
     setData(props.defalutData)
